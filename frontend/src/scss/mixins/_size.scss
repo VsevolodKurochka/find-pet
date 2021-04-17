@@ -1,0 +1,10 @@
+////
+/// Size
+/// @type mixin
+/// @param {Length} $width - Element's width
+/// @param {Length} $height [$width] - Element's height
+////
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}

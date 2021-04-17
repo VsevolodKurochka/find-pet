@@ -1,0 +1,21 @@
+////
+/// Padding Y
+/// @type mixin
+/// @param {Length} $top - Element's padding top
+/// @param {Length} $bottom [$top] - Element's padding bottom
+////
+@mixin padding-y($top, $bottom: $top) {
+  padding-top: $top;
+  padding-bottom: $bottom;
+}
+
+////
+/// Padding X
+/// @type mixin
+/// @param {Length} $left - Element's padding left
+/// @param {Length} $right [$left] - Element's padding right
+////
+@mixin padding-x($left, $right: $left) {
+  padding-left: $left;
+  padding-right: $right;
+}

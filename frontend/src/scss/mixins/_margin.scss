@@ -1,0 +1,21 @@
+////
+/// Margin Y
+/// @type mixin
+/// @param {Length} $top - Element's margin top
+/// @param {Length} $bottom [$top] - Element's margin bottom
+////
+@mixin margin-y($top, $bottom: $top) {
+  margin-top: $top;
+  margin-bottom: $bottom;
+}
+
+////
+/// Margin X
+/// @type mixin
+/// @param {Length} $left - Element's margin left
+/// @param {Length} $right [$left] - Element's margin right
+////
+@mixin margin-x($left, $right: $left) {
+  margin-left: $left;
+  margin-right: $right;
+}
