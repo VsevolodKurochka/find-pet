@@ -12,6 +12,7 @@
 /frontend/build
 /frontend/dist
 
+/backend/dist
 /backend/node_modules
 /backend/.development.env
 /backend/.production.env
@@ -20,3 +21,5 @@
 /backend/yarn-error.log*
 /backend/build
 /backend/dist
+/backend/node_modules/
+/backend/dist/
