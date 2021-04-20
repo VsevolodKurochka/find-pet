@@ -2,6 +2,8 @@ import {Module} from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import {ConfigModule} from '@nestjs/config';
+import { AnimalsModule } from './animals/animals.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
     controllers: [],
@@ -13,7 +15,9 @@ import {ConfigModule} from '@nestjs/config';
         MongooseModule.forRoot(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.7bw37.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
             useNewUrlParser: true
         }),
-        UsersModule
+        UsersModule,
+        AnimalsModule,
+        RolesModule
     ]
 })
 export class AppModule {
