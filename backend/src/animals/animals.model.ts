@@ -1,4 +1,4 @@
-import {model, Schema, Types} from 'mongoose';
+import {Schema, Types} from 'mongoose';
 
 const AnimalSchema = new Schema({
     name: String,
@@ -7,14 +7,15 @@ const AnimalSchema = new Schema({
     city: String,
     size: String,
     description: String,
+    images: {
+        type: Array,
+        default: []
+    },
     curator: {
         type: Types.ObjectId, ref: 'User', index: true, default: {}
     }
 });
 
-const AnimalModel = model('Animal', AnimalSchema);
-
 export {
-    AnimalModel,
     AnimalSchema
 };

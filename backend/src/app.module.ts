@@ -4,6 +4,7 @@ import { UsersModule } from './users/users.module';
 import {ConfigModule} from '@nestjs/config';
 import { AnimalsModule } from './animals/animals.module';
 import { RolesModule } from './roles/roles.module';
+import { ImagesModule } from './images/images.module';
 
 @Module({
     controllers: [],
@@ -17,7 +18,8 @@ import { RolesModule } from './roles/roles.module';
         }),
         UsersModule,
         AnimalsModule,
-        RolesModule
+        RolesModule,
+        ImagesModule
     ]
 })
 export class AppModule {

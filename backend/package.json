@@ -27,6 +27,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^7.2.4",
     "@nestjs/platform-express": "^7.6.15",
+    "cloudinary": "^1.25.1",
     "cross-env": "^7.0.3",
     "mongoose": "^5.12.4",
     "reflect-metadata": "^0.1.13",
