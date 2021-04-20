@@ -12,7 +12,7 @@ export class UsersService {
         return await this.userModel.find().exec();
     }
 
-    async getUser(id: string): Promise<UserDto> {
+    async getUser(id: string): Promise<UserInterface> {
         return await this.userModel.findById(id).exec();
     }
 

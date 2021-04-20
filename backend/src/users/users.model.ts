@@ -1,4 +1,4 @@
-import {model, Schema} from 'mongoose';
+import {model, Schema, Types} from 'mongoose';
 
 const UserSchema = new Schema({
     email: {
@@ -9,7 +9,13 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    roles: [{
+        type: Types.ObjectId, ref: 'Role', index: true, default: []
+    }],
+    animals: [{
+        type: Types.ObjectId, ref: 'Animal', index: true, default: []
+    }]
 });
 
 const UserModel = model('User', UserSchema);
