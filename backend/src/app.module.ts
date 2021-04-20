@@ -12,7 +12,7 @@ import { RolesModule } from './roles/roles.module';
         ConfigModule.forRoot({
             envFilePath: `.${process.env.NODE_ENV}.env`
         }),
-        MongooseModule.forRoot(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.7bw37.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
+        MongooseModule.forRoot(`${process.env.MONGO_URL}`, {
             useNewUrlParser: true
         }),
         UsersModule,

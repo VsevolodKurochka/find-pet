@@ -1,4 +1,4 @@
-import {model, Schema, Types} from 'mongoose';
+import {Schema, Types} from 'mongoose';
 
 const UserSchema = new Schema({
     email: {
@@ -10,6 +10,8 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    phone: String,
+    name: String,
     roles: [{
         type: Types.ObjectId, ref: 'Role', index: true, default: []
     }],
@@ -18,9 +20,6 @@ const UserSchema = new Schema({
     }]
 });
 
-const UserModel = model('User', UserSchema);
-
 export {
-    UserModel,
     UserSchema
 };
