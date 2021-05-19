@@ -4,3 +4,19 @@ body {
   line-height: $font-line-height;
   font-size: $font-size-default;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: inline-block;
+  img {
+    max-width: 40px;
+    vertical-align: middle;
+  }
+  @include breakpoint-up(lg) {
+    min-width: 155px;
+  }
+}

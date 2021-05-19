@@ -1,6 +1,10 @@
+import {LayoutPage} from '../../Layout';
+
 const Home = () => {
     return (
-        <h1>Home</h1>
+        <LayoutPage>
+            <h1>Home</h1>
+        </LayoutPage>
     );
 };
 
