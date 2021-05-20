@@ -6,7 +6,6 @@ const SingleAnimal = ({animal, loading}) => {
     if (loading || !animal) {
         return <Spin size={'large'} />
     }
-    console.log(animal.curator.phone);
     return (
         <>
             <Row gutter={32}>
