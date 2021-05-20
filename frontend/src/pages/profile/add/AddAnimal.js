@@ -129,8 +129,16 @@ const ProfileAddAnimal = () => {
                 <Form.Item
                     label="Вік"
                     name="age"
-                    rules={[{ required: true, message: 'Введіть Вік!' }, { type: 'number', min: 0, max: 99 }]}>
-                    <InputNumber />
+                    rules={[{ required: true, message: 'Виберіть Вік!' }]}>
+                    <Select
+                        placeholder="Виберіть вік"
+                    >
+                        <Option value="До 1 року">До 1 року</Option>
+                        <Option value="1-3 роки">1-3 роки</Option>
+                        <Option value="3-5 років">3-5 років</Option>
+                        <Option value="5-9 років">5-9 років</Option>
+                        <Option value="Від 10 років">Від 10 років</Option>
+                    </Select>
                 </Form.Item>
 
                 <Form.Item name="male" label="Стать" rules={[{ required: true }]}>

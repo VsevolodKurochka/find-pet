@@ -12,7 +12,7 @@ export class AnimalsService {
     }
 
     async getAnimal(id: string): Promise<AnimalsInterface> {
-        return await this.animalModel.findById(id).exec();
+        return await this.animalModel.findById(id).populate('curator').exec();
     }
 
     async createAnimal(dto: AnimalsDto): Promise<AnimalsInterface> {

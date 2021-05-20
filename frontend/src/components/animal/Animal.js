@@ -15,7 +15,7 @@ export const Animal = ({animal}) => {
             >
                 <img src={animal.male ? MaleIcon : FemaleIcon} alt={animal.name} className={'animal-item-icon'} />
                 <Meta
-                    title={`${animal.name}, ${animal.city}, ${animal.age} р.`}
+                    title={`${animal.name}, ${animal.city}, ${animal.age}`}
                     description={`${animal.description ? animal.description.slice(0, 150) : 'На жаль, опис не додали'}... `} />
                 <Button className={"animal-item-button"}>Перейти</Button>
             </Card>
