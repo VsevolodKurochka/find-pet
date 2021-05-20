@@ -5,6 +5,7 @@ import {ConfigModule} from '@nestjs/config';
 import { AnimalsModule } from './animals/animals.module';
 import { RolesModule } from './roles/roles.module';
 import { ImagesModule } from './images/images.module';
+import {AuthModule} from './auth/auth.module';
 
 @Module({
     controllers: [],
@@ -19,7 +20,8 @@ import { ImagesModule } from './images/images.module';
         UsersModule,
         AnimalsModule,
         RolesModule,
-        ImagesModule
+        ImagesModule,
+        AuthModule
     ]
 })
 export class AppModule {
