@@ -1,0 +1,12 @@
+.animal-item {
+  &-cover {
+    width: 100%;
+    object-fit: cover;
+  }
+  &-icon {
+    width: 30px;
+  }
+  &-button {
+    margin-top: 15px;
+  }
+}
