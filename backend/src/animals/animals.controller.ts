@@ -1,5 +1,4 @@
 import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put} from '@nestjs/common';
-import {RolesDto} from '../roles/roles.dto';
 import {ValidateObjectId} from '../pipes/validate-object-id.pipes';
 import {AnimalsService} from './animals.service';
 import {AnimalsDto} from './animals.dto';
@@ -21,24 +20,24 @@ export class AnimalsController {
 
     @Get('/:id')
     getAnimal(@Param('id', new ValidateObjectId()) id: string) {
-        const role = this.animalService.getAnimal(id);
-        if (!role) throw new NotFoundException('animal_not_found');
-        return role;
+        const animal = this.animalService.getAnimal(id);
+        if (!animal) throw new NotFoundException('animal_not_found');
+        return animal;
     }
 
     @Put('/:id')
     editAnimal(@Param('id', new ValidateObjectId()) id: string, @Body() dto: AnimalsDto){
-        const role = this.animalService.editAnimal(id, dto);
-        if (!role) throw new NotFoundException('animal_not_found');
+        const animal = this.animalService.editAnimal(id, dto);
+        if (!animal) throw new NotFoundException('animal_not_found');
 
-        return role;
+        return animal;
     }
 
     @Delete('/:id')
     async deleteAnimal(@Param('id', new ValidateObjectId()) id: string){
-        const role = await this.animalService.deleteAnimal(id);
-        if (!role) throw new NotFoundException('animal_not_found');
+        const animal = await this.animalService.deleteAnimal(id);
+        if (!animal) throw new NotFoundException('animal_not_found');
 
-        return role;
+        return animal;
     }
 }

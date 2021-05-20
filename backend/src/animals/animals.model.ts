@@ -5,7 +5,7 @@ const AnimalSchema = new Schema({
     age: String,
     male: Boolean,
     city: String,
-    size: String,
+    sterilized: Boolean,
     description: String,
     images: {
         type: Array,
