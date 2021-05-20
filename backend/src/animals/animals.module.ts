@@ -10,5 +10,6 @@ import {AnimalSchema} from './animals.model';
   imports: [
     MongooseModule.forFeature([{ name: 'Animal', schema: AnimalSchema }])
   ],
+  exports: [AnimalsService]
 })
 export class AnimalsModule {}
