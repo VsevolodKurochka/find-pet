@@ -12,5 +12,6 @@ import {RolesModule} from '../roles/roles.module';
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     RolesModule
   ],
+  exports: [UsersService]
 })
 export class UsersModule {}
