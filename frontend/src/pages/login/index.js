@@ -2,7 +2,6 @@ import { Form, Input, Button, Typography, notification } from 'antd';
 import {LayoutPage} from '../../Layout';
 import api from '../../api';
 import {Redirect} from 'react-router-dom';
-import {useAuth} from '../../useAuth';
 import {notifyHandler} from '../../notifications';
 import {useContext} from 'react';
 import {AuthContext} from '../../AuthContext';
