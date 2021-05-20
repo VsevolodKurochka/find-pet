@@ -1,6 +1,6 @@
 import {Body, Controller, Delete, Get, Post, Put, Param, NotFoundException} from '@nestjs/common';
 import {UsersService} from './users.service';
-import {UserDto, AddUserRoleDto} from './user.dto';
+import {UserDto, AddUserRoleDto, AddUserAnimalDto} from './user.dto';
 import {ValidateObjectId} from '../pipes/validate-object-id.pipes';
 
 @Controller('users')
@@ -21,6 +21,11 @@ export class UsersController {
     @Post('/role')
     updateUserRole(@Body() userRoleDto: AddUserRoleDto){
         return this.usersService.updateUserRole(userRoleDto);
+    }
+
+    @Post('/animal')
+    updateUserAnimals(@Body() userAnimalDto: AddUserAnimalDto){
+        return this.usersService.updateUserAnimals(userAnimalDto);
     }
 
     @Get('/:id')

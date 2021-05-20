@@ -23,6 +23,11 @@ export interface AddUserRoleDto {
     userId: string;
 }
 
+export interface AddUserAnimalDto {
+    animalId: string;
+    userId: string;
+}
+
 export interface UserInterface extends Document {
     readonly phone: string;
     readonly name: string;

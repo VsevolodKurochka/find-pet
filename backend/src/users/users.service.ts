@@ -1,16 +1,18 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
-import {UserDto, AddUserRoleDto, UserInterface, CreateUserDto} from './user.dto';
+import {UserDto, AddUserRoleDto, UserInterface, CreateUserDto, AddUserAnimalDto} from './user.dto';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
-import {RolesInterface} from '../roles/roles.dto';
 import {RolesService} from '../roles/roles.service';
 import {RolesEnum} from '../roles/roles.enum';
+import {AnimalsService} from '../animals/animals.service';
+import {AnimalsInterface} from '../animals/animals.dto';
 
 @Injectable()
 export class UsersService {
     constructor(
         @InjectModel('User') private readonly userModel: Model<UserInterface>,
-        private rolesService: RolesService
+        private rolesService: RolesService,
+        private animalsService: AnimalsService
     ) { }
 
     async getUsers(): Promise<UserDto[]> {
@@ -46,6 +48,21 @@ export class UsersService {
             return this.userModel.findByIdAndUpdate(userRoleDto.userId, {
                 $addToSet: {
                     roles: role
+                }
+            }, {new: true});
+        }
+
+        throw new NotFoundException('user_not_found');
+    }
+
+    async updateUserAnimals(userAnimalDto: AddUserAnimalDto) {
+        const animal = await this.animalsService.getAnimal(userAnimalDto.animalId);
+        console.log(animal);
+        const user: UserInterface = await this.userModel.findById(userAnimalDto.userId);
+        if (user) {
+            return this.userModel.findByIdAndUpdate(userAnimalDto.userId, {
+                $addToSet: {
+                    animals: animal
                 }
             }, {new: true});
         }
