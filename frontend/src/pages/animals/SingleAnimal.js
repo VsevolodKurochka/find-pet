@@ -12,7 +12,7 @@ const SingleAnimal = ({animal, loading}) => {
             <Row gutter={32}>
                 <Col span={12}>
                     <div className="single-animal-image">
-                        <img src={animal.images[0]} alt={animal.name} />
+                        <img src={animal.images[0]} alt={animal.name} title={animal.title} />
                     </div>
                 </Col>
                 <Col span={12}>
@@ -20,7 +20,8 @@ const SingleAnimal = ({animal, loading}) => {
                     <Typography.Title>
                         {animal.name}, <img src={animal.male ? MaleIcon : FemaleIcon} alt={animal.name} className={'animal-item-icon'} />
                     </Typography.Title>
-                    <Typography.Paragraph><strong>Стерілізація</strong>: {animal.sterilized ? 'Так' : 'Ні'}</Typography.Paragraph>
+                    <Typography.Paragraph><strong>Стать</strong>: {animal.male ? 'Чоловіча' : 'Жіноча'}</Typography.Paragraph>
+                    <Typography.Paragraph><strong>Стерилізована</strong>: {animal.sterilized ? 'Так' : 'Ні'}</Typography.Paragraph>
                     <Typography.Paragraph><strong>Вік</strong>: {animal.age}</Typography.Paragraph>
                     <Typography.Paragraph><strong>Місто</strong>: {animal.city}</Typography.Paragraph>
                     <Typography.Paragraph><strong>Опис</strong>:<br /> {animal.description}</Typography.Paragraph>
