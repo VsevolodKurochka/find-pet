@@ -1,29 +1,32 @@
-import { Layout, Menu, Breadcrumb } from 'antd';
+import {Layout, Menu, Breadcrumb, notification} from 'antd';
 import {
-    UserOutlined, LaptopOutlined, NotificationOutlined
+    UserOutlined, LogoutOutlined
 } from '@ant-design/icons';
-import {useState, useCallback} from 'react';
+import {useState, useCallback, useContext} from 'react';
 import Logo from './logo.png';
 import {
     Link
 } from "react-router-dom";
+import {useAuth} from './useAuth';
+import {AuthContext} from './AuthContext';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 export const LayoutPage = ({children}) => {
-    const [collapsed, setCollapsed] = useState(false);
+    const {isAuthenticated, logout} = useContext(AuthContext);
     const year = new Date().getFullYear();
 
-    const onCollapse = useCallback(() => {
-        setCollapsed(prevState => !prevState);
+    const logoutFromAccount = useCallback(() => {
+        logout();
+        notification.success({message: 'Успішно!', description: 'Ви вийшли з системи!'})
     }, []);
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Header className="header">
                 <div className="logo">
-                    <img src={Logo} alt={'logo'} />
+                    <Link to={'/'}><img src={Logo} alt={'logo'} /></Link>
                 </div>
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
                     <Menu.Item key="1"><Link to="/">Головна</Link></Menu.Item>
@@ -38,20 +41,25 @@ export const LayoutPage = ({children}) => {
                     <Menu
                         mode="inline"
                         style={{ height: '100%', borderRight: 0 }}
+                        defaultOpenKeys={['sub1']}
                     >
-                        <Menu.Item key="5"><Link to="/">Реєстрація</Link></Menu.Item>
-                        <Menu.Item key="6"><Link to="/">Вхід в систему</Link></Menu.Item>
-                        <SubMenu key="sub1" icon={<UserOutlined />} title="Кабінет">
-                            <Menu.Item key="1"><Link to="/">Додати оголошення</Link></Menu.Item>
-                            <Menu.Item key="2"><Link to="/">Мої тварини</Link></Menu.Item>
-                        </SubMenu>
-                        <Menu.Item key="6"><Link to="/">Вийти</Link></Menu.Item>
+                        {isAuthenticated && <>
+                            <SubMenu key="sub1" icon={<UserOutlined />} title="Кабінет">
+                                <Menu.Item key="cab"><Link to="/profile">Кабінет</Link></Menu.Item>
+                                <Menu.Item key="add"><Link to="/profile/add">Додати оголошення</Link></Menu.Item>
+                                <Menu.Item key="animals"><Link to="/profile/animals">Мої тварини</Link></Menu.Item>
+                            </SubMenu>
+                            <Menu.Item key="logout" icon={<LogoutOutlined />}><Link to="/" onClick={logoutFromAccount}>Вийти</Link></Menu.Item>
+                        </> }
+                        {!isAuthenticated && (
+                            <>
+                                <Menu.Item key="register"><Link to="/register">Реєстрація</Link></Menu.Item>
+                                <Menu.Item key="login"><Link to="/login">Вхід в систему</Link></Menu.Item>
+                            </>
+                        )}
                     </Menu>
                 </Sider>
                 <Layout style={{ padding: '0 24px 24px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Головна</Breadcrumb.Item>
-                    </Breadcrumb>
                     <Content
                         className="site-layout-background"
                         style={{
@@ -64,6 +72,7 @@ export const LayoutPage = ({children}) => {
                     </Content>
                 </Layout>
             </Layout>
+            <Footer style={{ textAlign: 'center' }}>Find Pet ©{year}<br />Курочка Всеволод</Footer>
         </Layout>
     );
 };
