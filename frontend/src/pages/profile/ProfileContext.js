@@ -1,5 +1,6 @@
 import {createContext} from 'react';
 
 export const ProfileContext = createContext({
-    user: null
+    user: null,
+    setUser: () => {}
 });

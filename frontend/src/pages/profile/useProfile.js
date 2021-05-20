@@ -5,7 +5,7 @@ import {notification} from 'antd';
 import {notifyHandler} from '../../notifications';
 
 const useProfile = () => {
-    const {isAuthenticated, userId, token} = useContext(AuthContext);
+    const {userId} = useContext(AuthContext);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -17,7 +17,8 @@ const useProfile = () => {
     }, [user, userId]);
 
     return {
-        user
+        user,
+        setUser
     }
 };
 

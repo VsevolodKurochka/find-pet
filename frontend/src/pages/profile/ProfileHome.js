@@ -1,13 +1,29 @@
-import {Button, Col, Row, Spin, Typography} from 'antd';
-import {useContext} from 'react';
+import {Button, Col, Row, Spin, Typography, Modal, Form, Input, notification} from 'antd';
+import {useContext, useState} from 'react';
 import {ProfileContext} from './ProfileContext';
 import {useHistory} from 'react-router-dom';
+import {notifyHandler, notifySuccessHandler} from '../../notifications';
+import api from '../../api';
 
 const { Title, Text } = Typography;
 
+const layout = {
+    labelCol: { span: 7 },
+    wrapperCol: { span: 15 },
+};
+
+const tailLayout = {
+    wrapperCol: {
+        offset: 10,
+        span: 3,
+    },
+};
+
 const ProfileHome = () => {
-    const {user} = useContext(ProfileContext);
+    const {user, setUser} = useContext(ProfileContext);
     let history = useHistory();
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     const addAnimal = () => {
         history.push("/profile/add");
@@ -16,6 +32,30 @@ const ProfileHome = () => {
     const showAnimals = () => {
         history.push("/profile/animals");
     }
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setIsModalVisible(false);
+    };
+
+    const onFinish = ({email, name, phone}) => {
+        api
+            .put(`/users/${user._id}`, {email, name, phone})
+            .then(({data}) => {
+                notification.success(notifySuccessHandler('user_edited'));
+                setUser(data);
+            })
+            .catch((e) => {
+                notification.error(notifyHandler(e.response.data.message))
+            });
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
 
     if (!user) {
         return <Spin />
@@ -34,6 +74,9 @@ const ProfileHome = () => {
                     <Text>Телефон:</Text>
                     <Title level={4} className={'profile-home-info-title'}>{user.phone}</Title>
                 </Col>
+                <Col span={24}>
+                    <Button type="primary" onClick={showModal}>Редагувати</Button>
+                </Col>
             </Row>
             <Row gutter={16}>
                 <Col>
@@ -43,6 +86,40 @@ const ProfileHome = () => {
                     <Button onClick={showAnimals}>Мої тварини</Button>
                 </Col>
             </Row>
+            <Modal title="Редагувати дані" visible={isModalVisible} onCancel={closeModal} footer={null}>
+                <Form
+                    {...layout}
+                    initialValues={{ email: user.email, name: user.name, phone: user.phone }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}>
+                    <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[{type: 'email', message: 'Введіть коректний E-mail!',}, { required: true, message: 'Введіть E-mail!' }]}>
+                        <Input />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Ім'я"
+                        name="name"
+                        rules={[{ required: true, message: 'Введіть Ім\'я!' }]}>
+                        <Input />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="phone"
+                        label="Телефон"
+                        rules={[{ required: true, message: 'Введіть телефон!' }]}>
+                        <Input style={{ width: '100%' }} />
+                    </Form.Item>
+
+                    <Form.Item {...tailLayout}>
+                        <Button type="primary" htmlType="submit">
+                            Зберегти
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
         </>
     );
 };
