@@ -5,7 +5,8 @@ const notifications = {
     user_not_found: 'Такого користувача не існує',
     animal_not_found: 'Такої тварини не існує',
 
-    animal_added: 'Тварина успішно додана'
+    animal_added: 'Тварина успішно додана',
+    user_edited: 'Дані користувача успішно відредаговані'
 };
 
 const notifyHandler = (value) => ({
